@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 
 class ProductsViewModel : ViewModel() {
     val productsResponse : MutableLiveData<List<ProductsRpItem>> = MutableLiveData<List<ProductsRpItem>>()
+    val productResponse : MutableLiveData<ProductsRpItem> = MutableLiveData<ProductsRpItem>()
+
 
     fun getProducts() {
         viewModelScope.launch {
@@ -20,9 +22,18 @@ class ProductsViewModel : ViewModel() {
             }catch (e : java.lang.Exception){
                 Log.d("exceptionFound", e.toString())
             }
-
-
         }
-}
+    }
+
+    fun getProduct(id : String) {
+        viewModelScope.launch {
+            try {
+                val product = ProductsObj.productsRequest.getProduct(productId = id)
+                productResponse.value = product
+            }catch (e : java.lang.Exception){
+                Log.d("exceptionFound", e.toString())
+            }
+        }
+    }
 
 }

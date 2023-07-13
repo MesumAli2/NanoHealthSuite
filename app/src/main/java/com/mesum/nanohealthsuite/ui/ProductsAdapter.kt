@@ -22,11 +22,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.mesum.cryptoproject.ui.`interface`.OnProductClicked
 import com.mesum.nanohealthsuite.databinding.ProductsItemBinding
 import com.mesum.nanohealthsuite.model.ProductsRpItem
 
 
-class ProductsAdapter :
+class ProductsAdapter (val onItemClick: OnProductClicked):
     ListAdapter<ProductsRpItem, ProductsAdapter.ProductViewHolder>(DiffCallback) {
 
 
@@ -41,6 +42,7 @@ class ProductsAdapter :
             binding.tvDescription.text = product.description.toString()
 
         }
+
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<ProductsRpItem>() {
@@ -68,5 +70,8 @@ class ProductsAdapter :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = getItem(position)
         holder.bind(product)
+        holder.itemView.setOnClickListener {
+            onItemClick.onItemClick(product.id.toString())
+        }
     }
 }

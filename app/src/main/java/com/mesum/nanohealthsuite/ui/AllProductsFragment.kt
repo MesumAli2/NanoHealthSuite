@@ -5,14 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.mesum.cryptoproject.ui.`interface`.OnProductClicked
 import com.mesum.nanohealthsuite.R
 import com.mesum.nanohealthsuite.databinding.FragmentAllProductsBinding
 import com.mesum.nanohealthsuite.databinding.FragmentLoginBinding
 
-class AllProductsFragment : Fragment() {
+class AllProductsFragment : Fragment(), OnProductClicked {
     private var _binding : FragmentAllProductsBinding? = null
     private val binding get() = _binding!!
     private lateinit var productsAdapter : ProductsAdapter
@@ -43,12 +46,15 @@ class AllProductsFragment : Fragment() {
         }
 
     }
-
     private fun initialize() {
         viewModel.getProducts()
-        productsAdapter = ProductsAdapter()
+        productsAdapter = ProductsAdapter(this)
 
     }
+
+    override fun onItemClick(id: String) {
+        val bundle = bundleOf("productId" to id,)
+        findNavController().navigate(R.id.action_allProductsFragment_to_detailsFragment, bundle)    }
 
 
 }
