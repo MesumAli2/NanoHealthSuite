@@ -18,5 +18,14 @@
         android:id="@+id/allProductsFragment"
         android:name="com.mesum.nanohealthsuite.AllProductsFragment"
         android:label="fragment_all_products"
-        tools:layout="@layout/fragment_all_products" />
+        tools:layout="@layout/fragment_all_products" >
+        <action
+            android:id="@+id/action_allProductsFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.mesum.nanohealthsuite.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
 </navigation>
