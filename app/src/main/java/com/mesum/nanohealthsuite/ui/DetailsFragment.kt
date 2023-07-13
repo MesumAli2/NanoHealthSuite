@@ -1,5 +1,6 @@
 package com.mesum.nanohealthsuite.ui
 
+import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-
 import com.mesum.nanohealthsuite.databinding.FragmentDetailsBinding
+
 
 /**
  * A simple [Fragment] subclass.
@@ -43,19 +44,21 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialize()
+
         viewModel.productResponse.observe(viewLifecycleOwner){
             Log.d("singleProduct", it.toString())
             val bottomSheetDialogFragment = HalfHeightBottomSheetDialogFragment(it)
-
             bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
+            //binding.productImage.load(it.image)
+            //binding.tvDetails.text = it.title.toString()
+            binding.tvPrice.text = "${it.price} AED"
 
         }
-
-
     }
 
     private fun initialize() {
         viewModel.getProduct(idArgument.toString())
+
     }
 
 }

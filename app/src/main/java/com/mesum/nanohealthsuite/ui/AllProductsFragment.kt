@@ -38,6 +38,7 @@ class AllProductsFragment : Fragment(), OnProductClicked {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialize()
+
         viewModel.productsResponse.observe(viewLifecycleOwner){
             productsAdapter.submitList(it)
 
@@ -47,8 +48,9 @@ class AllProductsFragment : Fragment(), OnProductClicked {
 
     }
     private fun initialize() {
+        binding.toolBar.setTitle("All Products")
         viewModel.getProducts()
-        productsAdapter = ProductsAdapter(this)
+        productsAdapter = ProductsAdapter(this, requireContext())
 
     }
 

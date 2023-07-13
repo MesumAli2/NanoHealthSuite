@@ -3,6 +3,8 @@
     <style name="Base.Theme.NanoHealthSuite" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="Theme.NanoHealthSuite" parent="Base.Theme.NanoHealthSuite" />
@@ -14,6 +16,8 @@
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/gray</item>
         <item name="colorControlActivated">@color/yellow</item>
+        <item name="android:minHeight">24dp</item>  <!-- Set the desired height -->
+        <item name="android:maxHeight">24dp</item>
     </style>
 
 </resources>

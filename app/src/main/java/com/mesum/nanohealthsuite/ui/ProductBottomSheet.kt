@@ -9,7 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -26,8 +29,20 @@ class HalfHeightBottomSheetDialogFragment(val product: ProductsRpItem) : BottomS
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return  FragmentEntryDialogBinding.inflate(inflater, container, false).root
+        val customView = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_dialog, LinearLayout(requireContext())) as LinearLayout
+        // Get the root view of the BottomSheetDialogFragment
+       val binding = FragmentEntryDialogBinding.inflate(inflater, container, false).root
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Handle back press event here
+                // You can perform any desired actions or navigate back
+                dialog?.dismiss()
+                findNavController().navigate(R.id.allProductsFragment)
+            }
+        })
+        return  binding
     }
+    private var currentSheetState = BottomSheetBehavior.STATE_COLLAPSED
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentEntryDialogBinding.bind(view)
@@ -36,7 +51,6 @@ class HalfHeightBottomSheetDialogFragment(val product: ProductsRpItem) : BottomS
             binding.tvDescription.text = product.description.toString()
             binding.tvName.text = product.title.toString()
             binding.tvRating.text = product.rating?.rate.toString()
-
 
 
     }
@@ -51,6 +65,14 @@ class HalfHeightBottomSheetDialogFragment(val product: ProductsRpItem) : BottomS
 
         val contentView = layoutInflater.inflate(R.layout.fragment_entry_dialog, null)
         dialog.setContentView(contentView)
+
+
+
+        // Inflate the custom layout
+
+
+
+        // Add the custom layout to the root view
 
         // Set the peek height (initial visible height) of the bottom sheet
         dialog.behavior.peekHeight = getHalfScreenHeight()
@@ -75,12 +97,24 @@ class HalfHeightBottomSheetDialogFragment(val product: ProductsRpItem) : BottomS
                 }
             }
 
+
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 // Optional: Handle the slide offset if needed
+
             }
         })
 
 
+
+        dialog.findViewById<ImageView>(R.id.iv_state)?.setOnClickListener {
+            val currentState = dialog.behavior.state
+            if (currentState == BottomSheetBehavior.STATE_EXPANDED) {
+                dialog.behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            } else if (currentState == BottomSheetBehavior.STATE_COLLAPSED) {
+                dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
 
 
         // Adjust the dialog position to appear at the bottom of the screen

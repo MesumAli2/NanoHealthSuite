@@ -16,30 +16,38 @@
 
 package com.mesum.nanohealthsuite.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.bumptech.glide.Glide
 import com.mesum.cryptoproject.ui.`interface`.OnProductClicked
 import com.mesum.nanohealthsuite.databinding.ProductsItemBinding
 import com.mesum.nanohealthsuite.model.ProductsRpItem
 
 
-class ProductsAdapter (val onItemClick: OnProductClicked):
+class ProductsAdapter (val onItemClick: OnProductClicked, val ctx : Context):
     ListAdapter<ProductsRpItem, ProductsAdapter.ProductViewHolder>(DiffCallback) {
 
 
     class ProductViewHolder(
         private var binding: ProductsItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: ProductsRpItem) {
+        fun bind(product: ProductsRpItem, ctx: Context) {
             binding.ivProduct.load(product.image)
             binding.txPrice.text = product.price.toString()
             binding.ratingBar.rating = product.rating?.rate?.toFloat() ?: 2f
             binding.tvName.text = product.title.toString()
             binding.tvDescription.text = product.description.toString()
+
+            Glide.with(ctx)
+                .load(product.image) // Replace with your image URL or resource
+                .centerCrop() // Scale type to crop and fill the ImageView
+                .into(binding.ivProduct)
+
 
         }
 
@@ -69,7 +77,7 @@ class ProductsAdapter (val onItemClick: OnProductClicked):
      */
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = getItem(position)
-        holder.bind(product)
+        holder.bind(product, ctx)
         holder.itemView.setOnClickListener {
             onItemClick.onItemClick(product.id.toString())
         }

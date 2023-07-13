@@ -6,4 +6,5 @@
     <string name="password">Password</string>
     <string name="ctn">Continue</string>
     <string name="details">Detail</string>
+    <string name="all_products">All Products</string>
 </resources>
