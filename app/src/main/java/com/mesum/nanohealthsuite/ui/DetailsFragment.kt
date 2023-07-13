@@ -47,6 +47,10 @@ class DetailsFragment : Fragment() {
         viewModel.productResponse.observe(viewLifecycleOwner){
             Log.d("singleProduct", it.toString())
         }
+
+        val bottomSheetDialogFragment = HalfHeightBottomSheetDialogFragment()
+        bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
+
     }
 
     private fun initialize() {
