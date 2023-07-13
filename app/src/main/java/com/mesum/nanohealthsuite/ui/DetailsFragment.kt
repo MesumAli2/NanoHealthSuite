@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 
-import com.mesum.nanohealthsuite.R
-import com.mesum.nanohealthsuite.databinding.FragmentAllProductsBinding
 import com.mesum.nanohealthsuite.databinding.FragmentDetailsBinding
 
 /**
@@ -23,6 +21,7 @@ class DetailsFragment : Fragment() {
     private lateinit var productsAdapter : ProductsAdapter
     private val viewModel : ProductsViewModel by viewModels()
     private var idArgument: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +45,12 @@ class DetailsFragment : Fragment() {
         initialize()
         viewModel.productResponse.observe(viewLifecycleOwner){
             Log.d("singleProduct", it.toString())
+            val bottomSheetDialogFragment = HalfHeightBottomSheetDialogFragment(it)
+
+            bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
+
         }
 
-        val bottomSheetDialogFragment = HalfHeightBottomSheetDialogFragment()
-        bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
 
     }
 
