@@ -18,6 +18,8 @@
         <item name="colorControlActivated">@color/yellow</item>
         <item name="android:minHeight">24dp</item>  <!-- Set the desired height -->
         <item name="android:maxHeight">24dp</item>
+        <item name="android:scaleX">0.5</item>
+        <item name="android:scaleY">0.5</item>
     </style>
 
 </resources>

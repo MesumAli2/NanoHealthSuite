@@ -6,15 +6,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.DetailsFragment">
 
+    <ImageView
+        android:id="@+id/iv_main"
+        android:layout_width="match_parent"
+        android:layout_height="414dp"
+        android:background="@drawable/maintabback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="117dp"
+        android:src="@drawable/backmain"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_main"
+        app:layout_constraintEnd_toEndOf="@+id/iv_main"
+        app:layout_constraintStart_toStartOf="@+id/iv_main"
+        app:layout_constraintTop_toTopOf="@+id/iv_main" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="336dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Log In"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/ll_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+
+        android:layout_marginHorizontal="24sp"
+        android:layout_marginVertical="42dp"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/iv_main">
 
 
         <TextView
@@ -26,11 +59,19 @@
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:layout_height="wrap_content" >
+        </EditText>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@drawable/space"/>
 
         <TextView
             android:id="@+id/password_hint"
             android:layout_width="wrap_content"
+            android:layout_marginTop="35sp"
             android:layout_height="wrap_content"
             android:text="@string/password" />
 
@@ -38,16 +79,23 @@
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@null"
             android:inputType="textPassword" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@drawable/space"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="74dp"
-            android:layout_marginTop="18dp">
+            android:layout_marginTop="20dp">
 
             <Button
                 android:id="@+id/buttonLogin"
                 android:layout_width="match_parent"
+                android:backgroundTint="#2AB3C6"
                 android:layout_height="74dp"
                 android:text="@string/ctn" />
         </androidx.cardview.widget.CardView>
@@ -60,8 +108,10 @@
         android:layout_width="match_parent"
         android:layout_height="74dp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/ll_login"
-        android:text="NEED HELP?" />
+        android:fontFamily="@font/roboto"
+        android:textColor="#000000"
+        android:text="NEED HELP?"
+        app:layout_constraintTop_toBottomOf="@id/ll_login" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

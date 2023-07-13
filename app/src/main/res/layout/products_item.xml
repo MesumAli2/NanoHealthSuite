@@ -11,6 +11,7 @@
         android:layout_width="0dp"
     android:layout_height="247dp"
     app:cardCornerRadius="12dp"
+        android:elevation="5dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -47,8 +48,8 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
 
-
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -58,10 +59,13 @@
 
                 <RatingBar
                     android:id="@+id/ratingBar"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/RatingBar"
-                    android:layout_marginEnd="12dp" />
+                    android:layout_marginEnd="-110dp"
+                    android:layout_marginBottom="-16dp"
+                    android:transformPivotX="0dp"
+                    android:theme="@style/RatingBar" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -94,7 +98,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

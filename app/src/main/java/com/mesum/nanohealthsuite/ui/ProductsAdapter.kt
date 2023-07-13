@@ -16,6 +16,7 @@
 
 package com.mesum.nanohealthsuite.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -36,9 +37,10 @@ class ProductsAdapter (val onItemClick: OnProductClicked, val ctx : Context):
     class ProductViewHolder(
         private var binding: ProductsItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(product: ProductsRpItem, ctx: Context) {
             binding.ivProduct.load(product.image)
-            binding.txPrice.text = product.price.toString()
+            binding.txPrice.text = "${product.price.toString()} AED"
             binding.ratingBar.rating = product.rating?.rate?.toFloat() ?: 2f
             binding.tvName.text = product.title.toString()
             binding.tvDescription.text = product.description.toString()
