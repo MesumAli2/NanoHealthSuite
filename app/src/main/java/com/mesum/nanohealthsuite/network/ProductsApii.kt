@@ -25,7 +25,7 @@ private const val BASE_URL ="https://fakestoreapi.com/"
 
     }
 
-     object WeatherObject {
+     object ProductsObj {
         val productsRequest = retrofit.create(ProductsInterface::class.java)
     }
 
