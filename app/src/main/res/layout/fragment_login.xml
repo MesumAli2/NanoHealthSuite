@@ -6,6 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.DetailsFragment">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/ll_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_main" />
+
     <ImageView
         android:id="@+id/iv_main"
         android:layout_width="match_parent"
@@ -16,6 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="240dp"
         android:layout_height="117dp"
         android:src="@drawable/backmain"
@@ -40,10 +52,10 @@
         android:id="@+id/ll_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-
         android:layout_marginHorizontal="24sp"
+
         android:layout_marginVertical="42dp"
+        android:orientation="vertical"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,36 +68,101 @@
             android:layout_height="wrap_content"
             android:text="@string/email" />
 
-        <EditText
-            android:id="@+id/editTextEmail"
+
+
+
+        <RelativeLayout
+            android:id="@+id/rlEmail"
             android:layout_width="match_parent"
-            android:layout_marginTop="8dp"
-            android:background="@null"
-            android:layout_height="wrap_content" >
-        </EditText>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/correct_format"
+                android:background="@null"
+                android:imeOptions="actionDone"
+                android:includeFontPadding="false"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textColorHint="#808080" />
+
+            <ImageButton
+                android:id="@+id/correct_format"
+                android:layout_width="17dp"
+                android:visibility="gone"
+                android:layout_height="17dp"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="#2AB3C6"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/correctformart"
+                android:gravity="center"
+                android:padding="10dp" />
+        </RelativeLayout>
+
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:src="@drawable/space"/>
+            android:layout_marginTop="10dp"
+            android:src="@drawable/space" />
 
         <TextView
             android:id="@+id/password_hint"
             android:layout_width="wrap_content"
-            android:layout_marginTop="35sp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="35sp"
             android:text="@string/password" />
 
-        <EditText
-            android:id="@+id/editTextPassword"
+
+        <RelativeLayout
+            android:id="@+id/rlePass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@null"
-            android:inputType="textPassword" />
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/tvShowHidePass"
+                android:background="@null"
+                android:imeOptions="actionDone"
+                android:includeFontPadding="false"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textColorHint="#808080" />
+
+            <ImageButton
+                android:id="@+id/tvShowHidePass"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/ic_show"
+                android:gravity="center"
+                android:padding="10dp" />
+        </RelativeLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:src="@drawable/space"/>
+            android:layout_marginTop="10dp"
+            android:src="@drawable/space" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -95,8 +172,8 @@
             <Button
                 android:id="@+id/buttonLogin"
                 android:layout_width="match_parent"
-                android:backgroundTint="#2AB3C6"
                 android:layout_height="74dp"
+                android:backgroundTint="#2AB3C6"
                 android:text="@string/ctn" />
         </androidx.cardview.widget.CardView>
 

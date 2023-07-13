@@ -1,6 +1,8 @@
 package com.mesum.nanohealthsuite.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mesum.nanohealthsuite.R
 import com.mesum.nanohealthsuite.databinding.FragmentLoginBinding
+import com.mesum.nanohealthsuite.utils.AsteriskPasswordTransformationMethod
 import okhttp3.ResponseBody
 
 class LoginFragment : Fragment() {
@@ -20,6 +23,7 @@ class LoginFragment : Fragment() {
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPassword: EditText
     private lateinit var buttonLogin: Button
+    private var isShowPass = false
     private var _binding : FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val viewModel : LoginViewModel by viewModels()
@@ -46,7 +50,41 @@ class LoginFragment : Fragment() {
         editTextEmail = binding.editTextEmail
         editTextPassword = binding.editTextPassword
         buttonLogin = binding.buttonLogin
+       binding.tvShowHidePass.setOnClickListener {
+           if (isShowPass) {
+               binding.tvShowHidePass.setImageDrawable(context?.getDrawable(R.drawable.ic_show))
+               binding.editTextPassword.transformationMethod = AsteriskPasswordTransformationMethod()
+               isShowPass = false
+           } else {
+               binding.tvShowHidePass.setImageDrawable(context?.getDrawable(R.drawable.ic_hide))
+               binding.editTextPassword.transformationMethod = null
+               isShowPass = true
+           }
+       }
 
+
+        val editTextEmail: EditText = binding.editTextEmail
+        editTextEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not needed for this implementation
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not needed for this implementation
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val email = s?.toString()
+                if (email != null && email.length >= 7) {
+                    // Email has more than 8 characters
+                    // Perform your desired action here
+                    binding.correctFormat.visibility = View.VISIBLE
+                }else{
+                    binding.correctFormat.visibility = View.GONE
+
+                }
+            }
+        })
         // Set click listener for the login button
         buttonLogin.setOnClickListener {
             val email = editTextEmail.text.toString().trim()
@@ -58,6 +96,8 @@ class LoginFragment : Fragment() {
                     val hashMap = HashMap<String, String>()
                     hashMap["username"] = email ?: ""
                     hashMap["password"] = password ?: ""
+                binding.progressBar.visibility = View.VISIBLE
+
                     val call = viewModel.apiService.login(hashMap)
                     call.enqueue(object : retrofit2.Callback<ResponseBody> {
                         override fun onResponse(call: retrofit2.Call<ResponseBody>, response: retrofit2.Response<ResponseBody>) {
@@ -66,12 +106,16 @@ class LoginFragment : Fragment() {
                                 // For example, you can access the response body using response.body()
                                 Log.d("responseRp", "success")
                                 Toast.makeText(activity, "Login successful!", Toast.LENGTH_SHORT).show()
+                                binding.progressBar.visibility = View.GONE
+
                                 findNavController().navigate(R.id.action_loginFragment_to_allProductsFragment)
 
                             } else {
                                 // Handle error response
                                 // For example, you can access the error body using response.errorBody()
                                 Log.e("responseRp", "${response.message().toString()}")
+                                binding.progressBar.visibility = View.GONE
+
                                 Toast.makeText(activity, "Incorrect User Name or Password!", Toast.LENGTH_SHORT).show()
 
                             }
@@ -88,7 +132,7 @@ class LoginFragment : Fragment() {
                 // Finish the login activity
             } else {
                 // Login failed
-                Toast.makeText(activity, "Invalid email or password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Enter both email or password", Toast.LENGTH_SHORT).show()
             }
         }
     }
