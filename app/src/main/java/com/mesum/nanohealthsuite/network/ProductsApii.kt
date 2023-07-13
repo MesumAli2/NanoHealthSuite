@@ -23,6 +23,8 @@ private const val BASE_URL ="https://fakestoreapi.com/"
         @GET("products")
         suspend fun getProducts() : List<ProductsRpItem>
 
+
+
     }
 
      object ProductsObj {

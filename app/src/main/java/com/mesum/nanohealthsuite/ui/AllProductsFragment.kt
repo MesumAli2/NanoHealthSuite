@@ -9,9 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.mesum.nanohealthsuite.R
+import com.mesum.nanohealthsuite.databinding.FragmentAllProductsBinding
+import com.mesum.nanohealthsuite.databinding.FragmentLoginBinding
 
 class AllProductsFragment : Fragment() {
-
+    private var _binding : FragmentAllProductsBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var productsAdapter : ProductsAdapter
     private val viewModel : ProductsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,17 +28,25 @@ class AllProductsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_products, container, false)
+        _binding = FragmentAllProductsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.getProducts()
+        initialize()
         viewModel.productsResponse.observe(viewLifecycleOwner){
-            Log.d("ProductRp", it.toString())
+            productsAdapter.submitList(it)
+
+            binding.rvProducts.adapter = productsAdapter
 
         }
+
+    }
+
+    private fun initialize() {
+        viewModel.getProducts()
+        productsAdapter = ProductsAdapter()
 
     }
 

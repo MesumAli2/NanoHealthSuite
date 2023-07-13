@@ -36,7 +36,9 @@ class ProductsAdapter :
         fun bind(product: ProductsRpItem) {
             binding.ivProduct.load(product.image)
             binding.txPrice.text = product.price.toString()
-            binding.ratingBar.rating = product.rating
+            binding.ratingBar.rating = product.rating?.rate?.toFloat() ?: 2f
+            binding.tvName.text = product.title.toString()
+            binding.tvDescription.text = product.description.toString()
 
         }
     }
