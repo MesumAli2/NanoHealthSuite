@@ -136,7 +136,7 @@ class LoginFragment : Fragment() {
                 // Finish the login activity
             } else {
                 // Login failed
-                Toast.makeText(activity, "Enter both email or password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Enter both email and password", Toast.LENGTH_SHORT).show()
             }
         }
     }
