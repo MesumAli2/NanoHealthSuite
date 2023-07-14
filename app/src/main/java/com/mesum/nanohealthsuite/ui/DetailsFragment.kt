@@ -13,11 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.mesum.nanohealthsuite.databinding.FragmentDetailsBinding
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailsFragment : Fragment() {
     private var _binding : FragmentDetailsBinding? = null
     private val binding get() = _binding!!
