@@ -7,4 +7,8 @@
     <string name="ctn">Continue</string>
     <string name="details">Detail</string>
     <string name="all_products">All Products</string>
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="favourite">Favourite</string>
+    <string name="profile">Profile</string>
 </resources>

@@ -102,8 +102,10 @@ class LoginFragment : Fragment() {
                     call.enqueue(object : retrofit2.Callback<ResponseBody> {
                         override fun onResponse(call: retrofit2.Call<ResponseBody>, response: retrofit2.Response<ResponseBody>) {
                             if (response.code() == 200) {
-                                // Handle successful login response
-                                // For example, you can access the response body using response.body()
+                                // Handle successful login response when credentials match below
+                                //    "username": "mor_2314",
+                                //    "password": "83r5^_"
+                                //}
                                 Log.d("responseRp", "success")
                                 Toast.makeText(activity, "Login successful!", Toast.LENGTH_SHORT).show()
                                 binding.progressBar.visibility = View.GONE
