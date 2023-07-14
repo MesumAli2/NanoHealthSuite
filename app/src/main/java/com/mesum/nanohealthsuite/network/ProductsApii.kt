@@ -19,10 +19,6 @@ import retrofit2.http.Path
 
 private const val BASE_URL ="https://fakestoreapi.com/"
 
-    private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
-
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
