@@ -12,6 +12,15 @@
     <style name="BottomSheetDialogStyle">
         <item name="android:background">@drawable/rounded_dialog</item>
     </style>
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
+
+    </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/gray</item>
@@ -22,4 +31,13 @@
         <item name="android:scaleY">0.5</item>
     </style>
 
+    <style name="RatingBarDetails" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/yellow</item>
+        <item name="android:minHeight">24dp</item>  <!-- Set the desired height -->
+        <item name="android:maxHeight">24dp</item>
+        <item name="android:scaleX">0.7</item>
+        <item name="android:scaleY">0.7</item>
+
+    </style>
 </resources>

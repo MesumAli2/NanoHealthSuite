@@ -6,8 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.mesum.nanohealthsuite.databinding.FragmentDetailsBinding
 
 
@@ -52,7 +54,13 @@ class DetailsFragment : Fragment() {
             //binding.productImage.load(it.image)
             //binding.tvDetails.text = it.title.toString()
             binding.tvPrice.text = "${it.price} AED"
+            binding.ivOptions.setOnClickListener {
+                Toast.makeText(activity, "No Options Available for this product", Toast.LENGTH_SHORT).show()
+            }
+        }
 
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 

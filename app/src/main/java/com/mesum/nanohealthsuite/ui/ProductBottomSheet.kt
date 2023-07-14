@@ -2,6 +2,7 @@ package com.mesum.nanohealthsuite.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.KeyEvent
@@ -21,8 +22,7 @@ import com.mesum.nanohealthsuite.databinding.FragmentEntryDialogBinding
 import com.mesum.nanohealthsuite.model.ProductsRpItem
 
 
-class HalfHeightBottomSheetDialogFragment(val product: ProductsRpItem) : BottomSheetDialogFragment() {
-    private val viewModel : ProductsViewModel by viewModels()
+class HalfHeightBottomSheetDialogFragment(private val product: ProductsRpItem) : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,15 +42,26 @@ class HalfHeightBottomSheetDialogFragment(val product: ProductsRpItem) : BottomS
         })
         return  binding
     }
-    private var currentSheetState = BottomSheetBehavior.STATE_COLLAPSED
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentEntryDialogBinding.bind(view)
 
             binding.ratingBar.rating = product.rating?.rate?.toFloat() ?: 2f
             binding.tvDescription.text = product.description.toString()
-            binding.tvName.text = product.title.toString()
+            binding.tvDesc.text = product.title.toString()
             binding.tvRating.text = product.rating?.rate.toString()
+        binding.tvReviews.text = "Reviews (${product.rating?.count})"
+        binding.ivShare.setOnClickListener {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, product.title.toString())
+
+            val chooserIntent = Intent.createChooser(shareIntent, "Share via")
+            if (shareIntent.resolveActivity(requireActivity().packageManager) != null) {
+                startActivity(chooserIntent)
+            }
+        }
+
 
 
     }
@@ -128,4 +139,7 @@ class HalfHeightBottomSheetDialogFragment(val product: ProductsRpItem) : BottomS
         val displayMetrics = resources.displayMetrics
         return displayMetrics.heightPixels / 4
     }
+
+    override fun getTheme() = R.style.CustomBottomSheetDialogTheme
+
 }
