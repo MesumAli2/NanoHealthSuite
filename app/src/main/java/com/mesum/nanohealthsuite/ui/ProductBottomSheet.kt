@@ -29,7 +29,6 @@ class HalfHeightBottomSheetDialogFragment(private val product: ProductsRpItem) :
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val customView = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_dialog, LinearLayout(requireContext())) as LinearLayout
         // Get the root view of the BottomSheetDialogFragment
        val binding = FragmentEntryDialogBinding.inflate(inflater, container, false).root
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
@@ -50,8 +49,8 @@ class HalfHeightBottomSheetDialogFragment(private val product: ProductsRpItem) :
             binding.tvDescription.text = product.description.toString()
             binding.tvDesc.text = product.title.toString()
             binding.tvRating.text = product.rating?.rate.toString()
-        binding.tvReviews.text = "Reviews (${product.rating?.count})"
-        binding.ivShare.setOnClickListener {
+            binding.tvReviews.text = "Reviews (${product.rating?.count})"
+            binding.ivShare.setOnClickListener {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_TEXT, product.title.toString())
@@ -137,7 +136,7 @@ class HalfHeightBottomSheetDialogFragment(private val product: ProductsRpItem) :
 
     private fun getHalfScreenHeight(): Int {
         val displayMetrics = resources.displayMetrics
-        return displayMetrics.heightPixels / 4
+        return (displayMetrics.heightPixels / 3.6).toInt()
     }
 
     override fun getTheme() = R.style.CustomBottomSheetDialogTheme

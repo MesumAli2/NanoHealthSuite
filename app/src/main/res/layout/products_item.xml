@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_bold"
                 android:text="00000 AED"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="12dp"
                 android:textColor="@color/white"
                 android:textSize="22sp"
@@ -62,7 +62,7 @@
                     android:isIndicator="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="-110dp"
+                    android:layout_marginEnd="-105dp"
                     android:layout_marginBottom="-16dp"
                     android:transformPivotX="0dp"
                     android:theme="@style/RatingBar" />
@@ -77,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:fontFamily="sans-serif"
+        android:layout_marginStart="2dp"
         android:text="Products Name"
         android:textColor="#444B51"
         android:textStyle="italic"
@@ -87,10 +88,11 @@
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="6dp"
         android:fontFamily="@font/open_sans_reg"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna"
         android:textColor="#444B51"
+        android:layout_marginStart="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_desc" />
 

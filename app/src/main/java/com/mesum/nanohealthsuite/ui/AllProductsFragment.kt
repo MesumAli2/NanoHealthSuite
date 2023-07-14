@@ -37,11 +37,11 @@ class AllProductsFragment : Fragment(), OnProductClicked {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().window.statusBarColor = requireActivity().getColor(R.color.white)
         initialize()
 
         viewModel.productsResponse.observe(viewLifecycleOwner){
             productsAdapter.submitList(it)
-
             binding.rvProducts.adapter = productsAdapter
 
         }
