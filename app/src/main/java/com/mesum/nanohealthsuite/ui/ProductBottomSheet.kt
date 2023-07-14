@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -50,6 +51,9 @@ class HalfHeightBottomSheetDialogFragment(private val product: ProductsRpItem) :
             binding.tvDesc.text = product.title.toString()
             binding.tvRating.text = product.rating?.rate.toString()
             binding.tvReviews.text = "Reviews (${product.rating?.count})"
+             binding.btnOrder.setOnClickListener {
+               Toast.makeText(activity, "Order Placed for ${product.category}", Toast.LENGTH_SHORT).show()
+             }
             binding.ivShare.setOnClickListener {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
